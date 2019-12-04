@@ -3,15 +3,24 @@ package util
 import (
 	"bytes"
 	"io"
+	"strings"
 )
 
-// StringFromReader accepts any reader and returns the string that is contained within it.
-func StringFromReader(reader io.Reader) (string, error) {
+// StringsFromReader accepts any reader and returns the strings that is contained within it. Strings
+// are separated by the given separator.
+func StringsFromReader(reader io.Reader, sep string) ([]string, error) {
 	buf := bytes.Buffer{}
 	_, err := buf.ReadFrom(reader)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-
-	return string(buf.Bytes()), nil
+	var strs []string
+	segments := strings.Split(string(buf.Bytes()), sep)
+	for _, seg := range segments {
+		if len(seg) == 0 {
+			continue
+		}
+		strs = append(strs, seg)
+	}
+	return strs, nil
 }
