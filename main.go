@@ -9,6 +9,7 @@ import (
 	"github.com/heedson/aoc-2019/day2"
 	"github.com/heedson/aoc-2019/day3"
 	"github.com/heedson/aoc-2019/day4"
+	"github.com/heedson/aoc-2019/day5"
 )
 
 type day interface {
@@ -21,6 +22,7 @@ var days = []day{
 	day2.New(),
 	day3.New(),
 	day4.New(),
+	day5.New(),
 }
 
 func main() {
