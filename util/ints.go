@@ -30,3 +30,17 @@ func IntsFromReader(reader io.Reader, sep string) ([]int, error) {
 	}
 	return ints, nil
 }
+
+// SplitInt splits the given int into it's individual numerical values. e.g. 106 -> [1, 0, 6]
+func SplitInt(i int) []int {
+	return splitInt(i, nil)
+}
+
+func splitInt(remainingNumber int, digits []int) []int {
+	if remainingNumber != 0 {
+		digit := remainingNumber % 10
+		digits = append([]int{digit}, digits...)
+		return splitInt(remainingNumber/10, digits)
+	}
+	return digits
+}
